@@ -1,0 +1,4 @@
+ch_shop:
+    resource: "@ChShopBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,15 @@
+{% extends 'ChShopBundle::layout.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    <article class="blog">
+        <header>
+            <h2>{{ product.name }}</h2>
+        </header>
+        <img src="{{ asset(['images/', product.image]|join) }}" alt="{{ product.name }} image not found" class="large" />
+        <div>
+            <p>{{ product.description }}</p>
+        </div>
+    </article>
+{% endblock %}

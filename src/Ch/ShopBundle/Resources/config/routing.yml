@@ -1,0 +1,12 @@
+ch_shophomepage:
+    path:     /
+    defaults: { _controller: "ChShopBundle:Page:index" }
+    requirements:
+             methods:  GET
+
+ch_product_show:
+    path:  /{id}
+    defaults: { _controller: "ChShopBundle:Product:show" }
+    requirements:
+        methods:  GET
+        id: \d+
