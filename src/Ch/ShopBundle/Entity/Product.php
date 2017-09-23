@@ -281,4 +281,9 @@ class Product
         $this->setAvailable(true);
     }
 
+
+    public function __toString()
+    {
+        return '';
+    }
 }
