@@ -9,6 +9,7 @@
 namespace Ch\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\AbstractLazyCollection;
 /**
  * @ORM\Entity(repositoryClass="Ch\ShopBundle\Entity\Repository\CategoryRepository")
  * @ORM\Table(name="category")
@@ -37,6 +38,35 @@ class Category
      * @ORM\Column(type="boolean")
      */
     protected $available;
+
+    /**
+     * @var Product
+     *
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     */
+    protected $products;
+
+    /**
+     * @return Product
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param Product $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @return mixed

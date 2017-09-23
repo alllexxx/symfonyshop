@@ -5,8 +5,15 @@ ch_shophomepage:
              methods:  GET
 
 ch_product_show:
-    path:  /{id}
+    path:  product/{id}
     defaults: { _controller: "ChShopBundle:Product:show" }
+    requirements:
+        methods:  GET
+        id: \d+
+
+ch_category_show:
+    path:  category/{id}
+    defaults: { _controller: "ChShopBundle:Category:show" }
     requirements:
         methods:  GET
         id: \d+

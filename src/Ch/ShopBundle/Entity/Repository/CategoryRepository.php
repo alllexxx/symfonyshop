@@ -3,7 +3,7 @@
 namespace Ch\ShopBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use Doctrine\ORM\Query\Expr\Join;
 /**
  * CategoryRepository
  *
@@ -14,16 +14,25 @@ class CategoryRepository extends EntityRepository
 {
     public function findOneByIdJoinedToCategory($productId)
     {
-       $query = $this->createQueryBuilder('c')
-            ->innerJoin('c.products', 'c')
-            ->where('c.id = :product_id')
-            ->setParameter('product_id', 5)
-            ->getQuery()->getResult();
+        /*$qb= $this->createQueryBuilder('c')
+           ->from('Ch\ShopBundle\Entity\Category', 'c')
+           ->innerJoin('product_category c',  Join::ON, 'c.id = product_category.category_id')
+           ->where('product_category.product_id = :product');
 
-        $this->db->select('users.name');
-        $this->db->from('users');
-        $this->db->join('user_group', 'user_group.user_id = users.id');
-        $this->db->join('groups', 'groups.id = user_group.group_id');
-        $this->db->where('user_group.group_id', 3);
+
+        $qb->setParameters(array('product' => $productId ));
+
+        $query = $qb->getQuery();
+
+         */
+
+        $query = $this->createQueryBuilder('c')
+            ->addSelect('product_category.product_id')
+            ->from('Ch\ShopBundle\Entity\Category', 'cat')
+            ->join('cat.name product_category')
+            ->where('product_category.product_id=1');
+
+        //$categories= $query->getResult();
+        return $query->getQuery()->getResult();
     }
 }

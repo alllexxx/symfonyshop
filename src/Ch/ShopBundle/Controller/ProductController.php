@@ -25,11 +25,17 @@ class ProductController extends Controller
         $product = $em->getRepository('ChShopBundle:Product')->find($id);
 
         if (!$product) {
-            throw $this->createNotFoundException('Unable to find Blog post.');
+            throw $this->createNotFoundException('Unable to find Blog product.');
         }
+
+        $categories = $product->getCategories();
+
 
         return $this->render('ChShopBundle:Product:show.html.twig', array(
             'product'      => $product,
+            'categories'   => $categories
         ));
     }
+
+
 }
